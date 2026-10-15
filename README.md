@@ -1,3 +1,4 @@
+
 # sysapp — ДЗ №1 по системному ПО (контейнер + CI/CD + мониторинг)
 
 **Генератор паролей** (FastAPI). Сервер генерирует криптостойкий пароль (модуль `secrets`) по заданным
@@ -6,13 +7,13 @@
 
 | Что | Где |
 |---|---|
-| Приложение | `https://<имя>.onrender.com/` |
+| Приложение | `https://system-software-hw1.onrender.com//` |
 | API | `GET /api/password?length=16&upper=true&digits=true&symbols=true` |
-| Health check | `https://<имя>.onrender.com/health` |
-| **Мониторинг** | `https://<имя>.onrender.com/monitoring` (health, CPU, память, посещения и пароли в час) |
-| Метрики Prometheus | `https://<имя>.onrender.com/metrics` |
+| Health check | `https://system-software-hw1.onrender.com/health` |
+| **Мониторинг** | `https://system-software-hw1.onrender.com/monitoring` (health, CPU, память, посещения и пароли в час) |
+| Метрики Prometheus | `https://system-software-hw1.onrender.com/metrics` |
 | Артефакт сборки | GitHub → Actions → запуск → Artifacts → `sysapp-wheel` (хранится 90 дней) |
-| Docker-образ | `ghcr.io/<user>/<repo>` (хранится постоянно) |
+| Docker-образ | `ghcr.io/LipoviyChay/system_software_hw1` (хранится постоянно) |
 
 > Хостинг бесплатный (Render Free): после 15 минут без запросов контейнер засыпает,
 > первый запрос после простоя может занять до ~1 минуты. Счётчики посещений при этом обнуляются.
