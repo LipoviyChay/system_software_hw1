@@ -7,7 +7,7 @@
 
 | Что | Где |
 |---|---|
-| Приложение | `https://system-software-hw1.onrender.com//` |
+| Приложение | `https://system-software-hw1.onrender.com/` |
 | API | `GET /api/password?length=16&upper=true&digits=true&symbols=true` |
 | Health check | `https://system-software-hw1.onrender.com/health` |
 | **Мониторинг** | `https://system-software-hw1.onrender.com/monitoring` (health, CPU, память, посещения и пароли в час) |
