@@ -1,13 +1,15 @@
 # sysapp — ДЗ №1 по системному ПО (контейнер + CI/CD + мониторинг)
 
-Небольшой веб-сервис (FastAPI): health check, страница мониторинга, метрики и счётчик посещений.
-Клиенты тонкие: браузер и Telegram-бот (`/stats`, `/health`) — вся логика на сервере.
+**Генератор паролей** (FastAPI). Сервер генерирует криптостойкий пароль (модуль `secrets`) по заданным
+параметрам (длина, заглавные, цифры, символы) и оценивает надёжность по энтропии. Пароли нигде не хранятся.
+Клиенты тонкие: браузер (страница `/`) и Telegram-бот (`/pass [длина]`, `/stats`, `/health`) — вся логика на сервере.
 
 | Что | Где |
 |---|---|
 | Приложение | `https://<имя>.onrender.com/` |
+| API | `GET /api/password?length=16&upper=true&digits=true&symbols=true` |
 | Health check | `https://<имя>.onrender.com/health` |
-| **Мониторинг** | `https://<имя>.onrender.com/monitoring` (health, CPU, память, посещения в час) |
+| **Мониторинг** | `https://<имя>.onrender.com/monitoring` (health, CPU, память, посещения и пароли в час) |
 | Метрики Prometheus | `https://<имя>.onrender.com/metrics` |
 | Артефакт сборки | GitHub → Actions → запуск → Artifacts → `sysapp-wheel` (хранится 90 дней) |
 | Docker-образ | `ghcr.io/<user>/<repo>` (хранится постоянно) |
@@ -47,7 +49,7 @@ docker-compose.yml, monitoring/, scripts/deploy.sh, scripts/server-setup.sh
 Страница `/monitoring` (данные — `/api/monitoring`, JSON) показывает:
 - **Health check** — статус и аптайм (`/health` — для внешних проверок);
 - **Ресурсы** — CPU и память процесса приложения (psutil), память контейнера по cgroup;
-- **Посещения** — за последний час, всего и по часам за 24 часа.
+- **Посещения и сгенерированные пароли** — за последний час, всего и по часам за 24 часа.
 
 ## Настройка с нуля (Render)
 

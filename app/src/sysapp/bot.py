@@ -17,11 +17,19 @@ def tg(method: str, **params):
 
 
 def answer(text: str) -> str:
-    cmd = text.split()[0].split("@")[0].lower() if text.strip() else ""
+    parts = text.split()
+    cmd = parts[0].split("@")[0].lower() if parts else ""
     try:
+        if cmd == "/pass":
+            length = 16
+            if len(parts) > 1 and parts[1].isdigit():
+                length = max(6, min(64, int(parts[1])))
+            d = requests.get(f"{API_URL}/api/password", params={"length": length}, timeout=5).json()
+            return f"{d['password']}\nНадёжность: {d['strength']} ({d['entropy_bits']} бит)"
         if cmd == "/stats":
             s = requests.get(f"{API_URL}/api/stats", timeout=5).json()
-            return (f"Посещений: {s['visits']}\n"
+            return (f"Паролей сгенерировано: {s['passwords_generated']}\n"
+                    f"Посещений: {s['visits']}\n"
                     f"Аптайм: {s['uptime_seconds']} сек\n"
                     f"Версия: {s['version']}")
         if cmd == "/health":
@@ -29,7 +37,7 @@ def answer(text: str) -> str:
             return f"Статус: {h['status']} (версия {h['version']})"
     except Exception as e:  # бэкенд недоступен
         return f"Бэкенд недоступен: {e}"
-    return "Команды: /stats - статистика, /health - проверка работоспособности"
+    return "Команды: /pass [длина] - новый пароль, /stats - статистика, /health - проверка работоспособности"
 
 
 def main():
